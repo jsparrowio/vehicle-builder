@@ -388,10 +388,14 @@ class Cli {
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin) {
               if (this.vehicles[i] instanceof Truck) {
+                if(this.vehicles[i].started === true) {
                 this.findVehicleToTow(this.vehicles[i] as Truck);
                 return;
+                } else {
+                  console.log('Start the truck first');
+                }
               } else {
-                console.log('The selected vehicle is not capable of towing!');
+                console.log('This vehicle is not capable of towing!');
               }
             }
           }
@@ -400,9 +404,13 @@ class Cli {
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin) {
               if (this.vehicles[i] instanceof Motorbike) {
+                if(this.vehicles[i].started === true) {
                 (this.vehicles[i] as Motorbike).wheelie();
+                } else {
+                  console.log('Start the motorbike first');
+                }
               } else {
-                console.log('The selected vehicle cannot do a wheelie!');
+                console.log('This vehicle cannot do a wheelie!');
               }
             }
           }
