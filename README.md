@@ -40,7 +40,7 @@ Once you build or select a vehicle, you will be taken to a menu of options to in
 - Select or create another vehicle: Brings you back to the starting menu, where you can create (build) or select a different vehicle to perform actions on.
 - Exit: Exits the program.
 
-For a walkthrough on how to use this project, please see the video linked:
+For a walkthrough on how to use this project, please see the video linked: [here](https://drive.google.com/file/d/1o-aDrBKMEkM7yNNkomZSh5Sb_bLuVn3-/view?usp=sharing)
 
 ## License
 This project uses the MIT License.

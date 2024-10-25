@@ -399,7 +399,7 @@ class Cli {
                 if (this.vehicles[i].currentSpeed !== 0) {
                   this.vehicles[i].decelerate(5);
                 } else {
-                  console.log(`The vehicles speed is current at 0 MPH, therefore cannot be decelerated`);
+                  console.log(`The vehicle is not currently moving, therefore cannot be decelerated`);
                 }
               } else {
                 console.log(`Start the vehicle first`)
