@@ -24,9 +24,9 @@ Download the source code for the project with a <code>git clone</code> on this r
   
 ## Usage
   
-To use the program successfully: open a CLI window and <code>cd</code> to the directory that contains the code (specifically index.js) for this program. Then run <code>npm run start</code>, which will then start the program. You can first either create your own custom vehicle, or select one of the prebuilt vehicles to use. Once you build or select a vehicle, you will be taken to a menu of options to interact with or list details of your vehicle. 
+To use the program successfully: open a CLI window and <code>cd</code> to the directory that contains the code (specifically index.js) for this program. Then run <code>npm run start</code>, which will then start the program. You can first either create your own custom vehicle, or select one of the prebuilt vehicles to use. 
 
-These options include:
+Once you build or select a vehicle, you will be taken to a menu of options to interact with or list details of your vehicle. These options include:
 - Print details: shows all the build details of your vehicle
 - Start vehicle: "starts the vehicle", which will change the vehicles status to started and allow you to do most of the other actions listed. Logs in the console that the vehicle was started.
 - Accelerate 5 MPH: increases the "vehicle speed" by 5 MPH, unless you have reached the top speed. Logs in the console that the speed was increased, or gives an exception message.
@@ -43,7 +43,7 @@ These options include:
 For a walkthrough on how to use this project, please see the video linked:
 
 ## License
-This project uses MIT License.
+This project uses the MIT License.
 
 Please refer to LICENSE file for more information.
  
@@ -54,6 +54,8 @@ No need to contribute as project is already completed. However, feel free to for
 ## Credits
   
 Base code provided by edX and their respective developers, written code by jsparrowio (Josh Garrett).
+
+Small amount of code based on a post fom Stack Overflow: [here](https://stackoverflow.com/questions/57321266/how-to-test-inquirer-validation)
   
 ## Tests
   

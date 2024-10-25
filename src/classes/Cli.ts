@@ -5,6 +5,22 @@ import Car from "./Car.js";
 import Motorbike from "./Motorbike.js";
 import Wheel from "./Wheel.js";
 
+// functions to check for valid inputs when building a vehicle
+const confirmAnswerString = async (input: string) => {
+  if (input === '') {
+    return 'Please provide an input';
+  }
+  return true;
+};
+const confirmAnswerNumber = async (input: string) => {
+  let userInput = parseInt(input);
+  if (input === '') {
+    return 'Please provide an input';
+  } else if (isNaN(userInput)) {
+    return 'Please only use numbers for this input';
+  }
+  return true;
+};
 // define the Cli class
 class Cli {
   vehicles: (Car | Truck | Motorbike)[];
@@ -82,31 +98,37 @@ class Cli {
           type: 'input',
           name: 'color',
           message: 'Enter Color',
+          validate: confirmAnswerString,
         },
         {
           type: 'input',
           name: 'make',
           message: 'Enter Make',
+          validate: confirmAnswerString,
         },
         {
           type: 'input',
           name: 'model',
           message: 'Enter Model',
+          validate: confirmAnswerString,
         },
         {
           type: 'input',
           name: 'year',
           message: 'Enter Year',
+          validate: confirmAnswerNumber,
         },
         {
           type: 'input',
           name: 'weight',
           message: 'Enter Weight',
+          validate: confirmAnswerNumber,
         },
         {
           type: 'input',
           name: 'topSpeed',
           message: 'Enter Top Speed',
+          validate: confirmAnswerNumber,
         },
       ])
       .then((answers) => {
@@ -138,36 +160,43 @@ class Cli {
           type: 'input',
           name: 'color',
           message: 'Enter Color',
+          validate: confirmAnswerString,
         },
         {
           type: 'input',
           name: 'make',
           message: 'Enter Make',
+          validate: confirmAnswerString,
         },
         {
           type: 'input',
           name: 'model',
           message: 'Enter Model',
+          validate: confirmAnswerString,
         },
         {
           type: 'input',
           name: 'year',
           message: 'Enter Year',
+          validate: confirmAnswerNumber,
         },
         {
           type: 'input',
           name: 'weight',
           message: 'Enter Weight',
+          validate: confirmAnswerNumber,
         },
         {
           type: 'input',
           name: 'topSpeed',
           message: 'Enter Top Speed',
+          validate: confirmAnswerNumber,
         },
         {
           type: 'input',
           name: 'towingCapacity',
           message: 'Enter Towing Capacity',
+          validate: confirmAnswerNumber,
         },
       ])
       .then((answers) => {
@@ -200,51 +229,61 @@ class Cli {
           type: 'input',
           name: 'color',
           message: 'Enter Color',
+          validate: confirmAnswerString,
         },
         {
           type: 'input',
           name: 'make',
           message: 'Enter Make',
+          validate: confirmAnswerString,
         },
         {
           type: 'input',
           name: 'model',
           message: 'Enter Model',
+          validate: confirmAnswerString,
         },
         {
           type: 'input',
           name: 'year',
           message: 'Enter Year',
+          validate: confirmAnswerNumber,
         },
         {
           type: 'input',
           name: 'weight',
           message: 'Enter Weight',
+          validate: confirmAnswerNumber,
         },
         {
           type: 'input',
           name: 'topSpeed',
           message: 'Enter Top Speed',
+          validate: confirmAnswerNumber,
         },
         {
           type: 'input',
           name: 'frontWheelDiameter',
           message: 'Enter Front Wheel Diameter',
+          validate: confirmAnswerNumber,
         },
         {
           type: 'input',
           name: 'frontWheelBrand',
           message: 'Enter Front Wheel Brand',
+          validate: confirmAnswerString,
         },
         {
           type: 'input',
           name: 'rearWheelDiameter',
           message: 'Enter Rear Wheel Diameter',
+          validate: confirmAnswerNumber,
         },
         {
           type: 'input',
           name: 'rearWheelBrand',
           message: 'Enter Rear Wheel Brand',
+          validate: confirmAnswerString,
         },
       ])
       .then((answers) => {
@@ -345,14 +384,26 @@ class Cli {
           // find the selected vehicle and accelerate it by 5 MPH
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin) {
-              this.vehicles[i].accelerate(5);
+              if (this.vehicles[i].currentSpeed !== this.vehicles[i].topSpeed) {
+                this.vehicles[i].accelerate(5);
+              } else {
+                console.log(`The vehicle has already reached its top speed!`)
+              }
             }
           }
         } else if (answers.action === 'Decelerate 5 MPH') {
           // find the selected vehicle and decelerate it by 5 MPH
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin) {
-              this.vehicles[i].decelerate(5);
+              if (this.vehicles[i].started === true) {
+                if (this.vehicles[i].currentSpeed !== 0) {
+                  this.vehicles[i].decelerate(5);
+                } else {
+                  console.log(`The vehicles speed is current at 0 MPH, therefore cannot be decelerated`);
+                }
+              } else {
+                console.log(`Start the vehicle first`)
+              }
             }
           }
         } else if (answers.action === 'Stop vehicle') {
@@ -384,13 +435,15 @@ class Cli {
             }
           }
         } else if (answers.action === 'Tow a vehicle') {
-          // performs the tow action only if the selected vehicle is a truck. calls the findVehicleToTow method to find a vehicle to tow and pass the selected truck as an argument. if the selected vehicle is not a truck, alerts the user that the vehicle is not capable of towing,
+          // performs the tow action only if the selected vehicle is a truck. 
+          // calls the findVehicleToTow method to find a vehicle to tow and pass the selected truck as an argument. 
+          // if the selected vehicle is not a truck, alerts the user that the vehicle is not capable of towing,
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin) {
               if (this.vehicles[i] instanceof Truck) {
-                if(this.vehicles[i].started === true) {
-                this.findVehicleToTow(this.vehicles[i] as Truck);
-                return;
+                if (this.vehicles[i].started === true) {
+                  this.findVehicleToTow(this.vehicles[i] as Truck);
+                  return;
                 } else {
                   console.log('Start the truck first');
                 }
@@ -404,8 +457,8 @@ class Cli {
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin) {
               if (this.vehicles[i] instanceof Motorbike) {
-                if(this.vehicles[i].started === true) {
-                (this.vehicles[i] as Motorbike).wheelie();
+                if (this.vehicles[i].started === true) {
+                  (this.vehicles[i] as Motorbike).wheelie();
                 } else {
                   console.log('Start the motorbike first');
                 }
